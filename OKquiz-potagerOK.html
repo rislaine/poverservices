@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un potager chez vous</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F5F1E9;
+            text-align: center;
+            padding: 20px;
+        }
+        h1, h2 {
+            font-weight: 600;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .question, .result {
+            display: none;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #A3D977;
+        }
+        .btn:hover {
+            background-color: #89BD50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Un potager chez vous, mais avec quel accompagnement ?</h1>
+        <p>Répondez à ces quelques questions pour découvrir le service idéal pour vous.</p>
+        
+        <div id="question1" class="question">
+            <h2>Combien de temps pouvez-vous consacrer à votre potager ?</h2>
+            <button class="btn" onclick="nextQuestion(2, 'service1')">Je veux un potager clé en main.</button>
+            <button class="btn" onclick="nextQuestion(2, 'service2')">J’ai un peu de temps mais j’aimerais être accompagné.</button>
+            <button class="btn" onclick="nextQuestion(2, 'service2')">Je veux tout apprendre et m’occuper de mon potager.</button>
+        </div>
+        
+        <div id="question2" class="question">
+            <h2>Comment vous sentez-vous avec un potager ?</h2>
+            <button class="btn" onclick="nextQuestion(3, 'service1')">Débutant, je veux un potager prêt à pousser.</button>
+            <button class="btn" onclick="nextQuestion(3, 'service2')">J’ai quelques bases, mais j’ai besoin d’un suivi.</button>
+            <button class="btn" onclick="nextQuestion(3, 'service2')">Passionné, mais je veux des conseils experts.</button>
+        </div>
+        
+        <div id="question3" class="question">
+            <h2>Aimeriez-vous un suivi régulier ?</h2>
+            <button class="btn" onclick="showResult('service1')">Non, juste l’installation.</button>
+            <button class="btn" onclick="showResult('service2')">Oui, j’aimerais un suivi.</button>
+            <button class="btn" onclick="showResult('service2')">Oui, et des ateliers !</button>
+        </div>
+        
+        <div id="service1" class="result">
+            <h2>Installation + 1ère visite</h2>
+            <p>Profitez d’un potager clé en main, prêt à pousser ! Nous nous chargeons de l’installation et d’une première visite de suivi pour vous aider à bien démarrer.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdGvrTJKczLxEKpwzPgHlEMwQ6nN6qmeYR0z75mAv2wZaqCew/viewform" class="btn">Je suis intéressé</a>
+        </div>
+        
+        <div id="service2" class="result">
+            <h2>Suivi + Ateliers</h2>
+            <p>Bénéficiez d’un suivi personnalisé et d’ateliers pratiques pour apprendre et entretenir votre potager toute l’année.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdGvrTJKczLxEKpwzPgHlEMwQ6nN6qmeYR0z75mAv2wZaqCew/viewform" class="btn">Je suis intéressé</a>
+        </div>
+    </div>
+
+    <script>
+        let answers = [];
+        function nextQuestion(next, service) {
+            document.querySelector('.question:not([style*="display: none"])').style.display = 'none';
+            document.getElementById('question' + next).style.display = 'block';
+            answers.push(service);
+        }
+        function showResult() {
+            document.querySelector('.question:not([style*="display: none"])').style.display = 'none';
+            let service1Count = answers.filter(a => a === 'service1').length;
+            let service2Count = answers.filter(a => a === 'service2').length;
+            document.getElementById(service1Count > service2Count ? 'service1' : 'service2').style.display = 'block';
+        }
+        document.getElementById('question1').style.display = 'block';
+    </script>
+</body>
+</html>
